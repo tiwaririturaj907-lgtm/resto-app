@@ -1,86 +1,87 @@
 import "./Login.css";
 import { useState } from "react";
-import { auth } from "../firebase";
+import { auth } from "../Firebase";
 import {
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 function Login() {
-  const [phone, setPhone] = useState("");
-  const [otp, setOtp] = useState("");
-
-  const sendOTP = async () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const handleSignup = async () => {
     try {
-      if (!window.recaptchaVerifier) {
-        window.recaptchaVerifier = new RecaptchaVerifier(
-          auth,
-          "recaptcha-container",
-          {}
-        );
-      }
-
-      const appVerifier = window.recaptchaVerifier;
-
-      const confirmationResult = await signInWithPhoneNumber(
+      await createUserWithEmailAndPassword(
         auth,
-        phone,
-        appVerifier
+        email,
+        password
       );
 
-      window.confirmationResult = confirmationResult;
-
-      alert("OTP Sent Successfully!");
+      alert("Account Created Successfully!");
     } catch (error) {
-      console.log(error);
       alert(error.message);
     }
   };
 
-  const verifyOTP = async () => {
+  const handleLogin = async () => {
     try {
-      const result = await window.confirmationResult.confirm(otp);
-
-      alert(
-        `Login Successful! Welcome ${result.user.phoneNumber}`
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
       );
+
+      alert("Login Successful!");
     } catch (error) {
-      console.log(error);
-      alert("Invalid OTP");
+      alert(error.message);
     }
   };
 
   return (
-  <section className="login-section">
-    <div className="login-container">
-      <h2>𝐇𝐀𝐑𝐈𝐓मां Login</h2>
+    <section className="login-section">
+      <div className="login-container">
+        <h2>HARITमां Login</h2>
 
-      <input
-        type="tel"
-        placeholder="+919876543210"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-      />
+        <input
+          type="email"
+          placeholder="Enter Email"
+          value={email}
+          onChange={(e) =>
+            setEmail(e.target.value)
+          }
+        />
 
-      <button onClick={sendOTP}>
-        Send OTP
-      </button>
+        <input
+  type={showPassword ? "text" : "password"}
+  placeholder="Enter Password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+/>
+<div style={{ margin: "10px 0" }}>
+  <input
+    type="checkbox"
+    id="showPassword"
+    checked={showPassword}
+    onChange={() =>
+      setShowPassword(!showPassword)
+    }
+  />
 
-      <input
-        type="text"
-        placeholder="Enter OTP"
-        value={otp}
-        onChange={(e) => setOtp(e.target.value)}
-      />
+  <label htmlFor="showPassword">
+    Show Password
+  </label>
+</div>
+        <button onClick={handleLogin}>
+          Login
+        </button>
 
-      <button onClick={verifyOTP}>
-        Verify OTP
-      </button>
-
-      <div id="recaptcha-container"></div>
-    </div>
-  </section>
-);
+        <button onClick={handleSignup}>
+          Create Account
+        </button>
+      </div>
+    </section>
+  );
 }
 
 export default Login;

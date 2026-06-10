@@ -1,0 +1,40 @@
+.booking {
+  padding: 80px 8%;
+  background: #111;
+  color: white;
+  text-align: center;
+}
+
+.booking h2 {
+  color: gold;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+}
+
+.booking-form {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.booking-form input {
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.booking-form button {
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: gold;
+  font-weight: bold;
+  cursor: pointer;
+}
+.booking-note {
+  margin-top: 15px;
+  color: #ccc;
+}

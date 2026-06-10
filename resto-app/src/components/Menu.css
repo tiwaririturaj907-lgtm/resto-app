@@ -96,3 +96,32 @@
 .search-box::placeholder {
   color: #aaa;
 }
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+@media (max-width: 768px) {
+
+  .food-grid {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+
+  .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .search-box {
+    width: 90%;
+  }
+
+  .food-card {
+    width: 100%;
+    margin: auto;
+  }
+}

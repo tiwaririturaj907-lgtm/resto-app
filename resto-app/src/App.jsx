@@ -137,10 +137,27 @@ const total = cart.reduce(
           ))}
 
           <h3 className="cart-total">Total: ₹{total}</h3>
+          <button
+  className="checkout-btn"
+  onClick={() => {
+    const orderText = cart
+      .map(
+        (item) =>
+          `${item.name} x ${item.quantity}`
+      )
+      .join("%0A");
 
-          <button className="checkout-btn">
-            Checkout
-          </button>
+    const message =
+      `🍽️ New Order%0A%0A${orderText}%0A%0ATotal: ₹${total}`;
+
+    window.open(
+      `https://wa.me/918795807257?text=${message}`,
+      "_blank"
+    );
+  }}
+>
+  Order on WhatsApp
+</button>
         </>
       )}
     </div>

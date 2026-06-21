@@ -104,11 +104,6 @@
 }
 @media (max-width: 768px) {
 
-  .food-grid {
-    grid-template-columns: 1fr;
-    padding: 0 10px;
-  }
-
   .filter-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -116,6 +111,10 @@
     gap: 8px;
   }
 
+  .food-card img {
+    aspect-ratio: 1 / 1;
+    height: auto;
+  }
   .search-box {
     width: 90%;
   }
@@ -123,5 +122,12 @@
   .food-card {
     width: 100%;
     margin: auto;
+    padding: 10px;
+  }
+  .food-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 10px;
+
   }
 }
